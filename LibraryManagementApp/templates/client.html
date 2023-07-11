@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{% static 'home.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>Client</title>
+</head>
+
+<style>
+    li{
+        background-size: 60px 400px;
+        cursor: default;
+        list-style-type: none;
+        font-family: "Times New Roman";
+    }
+    li:hover {
+        transform:  none;
+    }
+</style>
+
+<body>
+
+    {% for x in client %}
+         <h1>Clientul cu numarul de card: <i>{{ x.card }}</i></h1>
+    {% endfor %}
+
+
+    {% for x in client %}
+        <li>
+            <span style="color:darkgreen;">NUME</span> : {{ x.nume }} <br>
+            <span style="color:darkgreen;">CNP</span>  : {{ x.cnp}} <br>
+            <span style="color:darkgreen;">SERIA SI NUMARUL</span>  : {{ x.serie_numar }} <br>
+            <span style="color:darkgreen;">TELEFON</span>  : {{ x.telefon }} <br>
+        </li>
+    {% endfor %}
+
+    <hr>
+
+    <p>Inapoi la: <a href="http://127.0.0.1:8000/inchirieri">Inchirieri</a></p>
+
+</body>
+</html>

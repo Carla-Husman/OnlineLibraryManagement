@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{% static 'home.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>CLIENTI</title>
+</head>
+
+<style>
+    table, th, td {
+        border:1px solid black;
+        font-family: "Times New Roman";
+        border-color: #05381D;
+        color:#000000;
+        border-spacing: 2px;
+        text-align:center;
+    }
+    th{
+        background-color: #BAF0D3;
+        font-weight: bold;
+    }
+    td {
+        background-color: #cccccc;
+        font-style: normal;
+        font-size:25px;
+    }
+    .border {
+        border-width: 3px;
+        border-style: solid;
+        border-color: #868686;
+        background-color: #868686;
+        font-size:15px;
+        color: #BAF0D3;
+    }
+    a{
+        text-decoration:none;
+    }
+    .adaugare{
+        width:fit-content;
+        background-color:#FFFFFF;
+        border:5px solid;
+        border-style: ridge;;
+        font-family: "Times New Roman";
+        text-align:center;
+        color: darkslategray;
+        font-size: 20px;
+        float:right;
+    }
+    h1{
+        line-height:0;
+    }
+    body{
+        margin:180px;
+    }
+</style>
+
+<body>
+    <h1>CLIENTII BIBLIOTECII</h1>
+
+    <p class="adaugare"><a href="adaugareClient">Adaugare client</a></p>
+
+    <table style="width:100%">
+      <tr>
+        <th>NR. CARD</th>
+        <th>NUME</th>
+        <th>CNP</th>
+        <th>EDITARE/STERGERE</th>
+      </tr>
+
+        {% for x in client %}
+          <tr>
+              <td><i>{{ x.nr_card }}</i></td>
+              <td><a href="detalii/{{ x.id_cnp }}">{{ x.nume }}</a></td>
+              <td>{{ x.id_cnp }}</td>
+              <td>
+                  <span class="border"><a href="editareClient/{{ x.nr_card }}" style="color: #BAF0D3">editare</a></span>
+                  <span>&emsp;</span>
+                  <span class="border"><a href="stergereClient/{{ x.nr_card }}" style="color: #BAF0D3">stergere</a></span>
+              </td>
+          </tr>
+        {% endfor %}
+
+    </table>
+
+    <hr>
+
+    <p>Inapoi la: <a href="http://127.0.0.1:8000">Meniu</a></p>
+</body>
+</html>

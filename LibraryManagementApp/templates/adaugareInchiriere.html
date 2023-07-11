@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{% static 'home.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>Tranzactie</title>
+</head>
+
+<style>
+    label{
+        color: #05381D;
+        font-weight: bold;
+        font-family: "Times New Roman";
+        padding: 8px;
+        text-align: center;
+    }
+    input{
+        color: black;
+        font-size:24px;
+        font-family: "Times New Roman";
+        text-align: left;
+    }
+    select{
+        color: black;
+        font-size:24px;
+        font-family: "Times New Roman";
+        text-align: left;
+    }
+</style>
+
+<body>
+    <h1>INCHIRIERE</h1>
+
+    <form action = "" method = "POST">
+        {% csrf_token %}
+        <label for="dataI">Data inchiriere: </label>
+        <span><label for="dataR" style ="margin-left:3em;"> Data returnare: </label><br></span>
+        <span><input id="dataI"
+               type="date"
+               name="dataI"
+               value=""
+               style ="width: 290px;height: 30px;text-align:left;"
+               placeholder="dd-mm-yyyy"
+               min="1000-01-01" max="2023-12-31" required></span>
+
+		&emsp;
+        <span><input id="dataR"
+               type="date"
+               name="dataR"
+               value=""
+               style ="width: 290px;height: 30px;text-align:left;"
+               placeholder="dd-mm-yyyy"
+               min="1000-01-01" max="2023-12-31" required></span><br>
+
+        <label for="carte">Carte: </label>
+        <span><label for="autor" style ="margin-left:8em;">Autor: </label><br></span>
+        <select autocomplete="on" id="carte" name="carte"
+                      style ="width: 300px;height: 35px;text-align:left;" required>
+              <option value="error" style ="color: grey;">Alege cartea</option>
+              {% for x in carti %}
+                  <option value="{{ x.nume }}">{{ x.nume }}</option>
+              {% endfor %}
+        </select>
+
+		&emsp;
+        <span><select autocomplete="on" id="autor" name="autor"
+                      style ="width: 300px;height: 35px;text-align:left;" required>
+              <option value="error" style ="color: grey;">Alege autorul</option>
+              {% for x in autori %}
+                  <option value="{{ x.autor }}">{{ x.autor }}</option>
+              {% endfor %}
+        </select></span><br>
+
+		<label for="gen" style ="margin-left:1em;">Gen: </label>
+        <span><label for="card" style ="margin-left:7em;">Nr. card: </label><br></span>
+		<select autocomplete="on" id="gen" name="gen"
+                      style ="width: 300px;height: 35px;text-align:left;" required>
+              <option value="error" style ="color: grey;">Alege genul</option>
+              {% for x in genuri %}
+                  <option value="{{ x.gen }}">{{ x.gen }}</option>
+              {% endfor %}
+        </select>
+
+        &emsp;
+        <span><select autocomplete="on" id="card" name="card"
+                      style ="width: 300px;height: 35px;text-align:left;" required>
+              <option value="error" style ="color: grey;">Alege cardul</option>
+              {% for x in carduri %}
+                  <option value="{{ x.card }}">{{ x.card }}</option>
+              {% endfor %}
+        </select></span><br>
+
+        <label for="stare">Stare returnare: </label><br>
+        <select autocomplete="on" id="stare" name="stare"
+                      style ="width: 300px;height: 35px;text-align:left;" required>
+            <option value="error" style ="color: grey;">Alege stare</option>
+            <option value="buna">buna</option>
+            <option value="uzata">uzata</option>
+            <option value="pierduta">pierduta</option>
+        </select><br>
+
+        <br><input style="background-color: #04AA6D; color: white;"type="submit" value="ADAUGARE">
+    </form>
+
+    <hr>
+
+    {% if flag == 1 %}
+        <p style = "background-color: #AAEFDE;
+            color: darkgreen;">
+            {{ mesaj }}
+        </p>
+    {% elif flag == 0 %}
+        <pre style = "background-color: #AAEFDE;
+            font-family: Times New Roman;
+            color: red;">
+            {{ mesaj }}
+        </pre>
+    {% endif %}
+
+    <hr>
+
+    <p>Inapoi la: <a href="http://127.0.0.1:8000/inchirieri">Inchirieri</a></p>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{% static 'home.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>Editare</title>
+</head>
+
+<style>
+    label{
+        color: #05381D;
+        font-weight: bold;
+        font-family: "Times New Roman";
+        padding: 8px;
+        text-align: center;
+    }
+    input{
+        color: black;
+        font-size:24px;
+        font-family: "Times New Roman";
+        text-align: left;
+    }
+    select{
+        color: black;
+        font-size:24px;
+        font-family: "Times New Roman";
+        text-align: center;
+    }
+</style>
+
+<body>
+    <h1>Editarea inchiriere:</h1>
+
+    <form action = "" method = "POST">
+        {% csrf_token %}
+        <label for="stare">Stare: </label><br>
+        <select autocomplete="on" id="stare" name="stare">
+               {% if inchiriere.stare == None %}
+                    <option value="{{ ""}}">{{ "" }}</option>
+               {% else %}
+                    <option value="{{ "" }}">{{ inchiriere.stare }}</option>
+               {% endif %}
+               <option value="buna">buna</option>
+                <option value="uzata">uzata</option>
+                <option value="pierduta">pierduta</option>
+        </select><br>
+
+        <label for="dataI">Data inchiriere: </label><br>
+        <input id="dataI"
+               type="date"
+               name="dataI"
+               placeholder="dd-mm-yyyy"
+               readonly="readonly"
+               style="border-color:red"
+               value="{{ inchiriere.data_inchiriere }}"
+               min="1000-01-01" max="2023-12-31" required><br>
+
+        <label for="dataR">Data returnare: </label><br>
+        <input id="dataR"
+               type="date"
+               name="dataR"
+               placeholder="dd-mm-yyyy"
+               value="{{ inchiriere.data_returnare }}"
+               min="1000-01-01" max="2023-12-31" required><br>
+
+        <label for="id">Carte:</label><br>
+        <input id="id"
+                       type="text"
+                       value="{{ inchiriere.carte }}"
+                       style="border-color:red;width:38px;height: 30px;text-align:center;"
+                       readonly="readonly">
+
+        <span><input id="nume_carte"
+                   type="text"
+                   {% for x in carti %}
+                      {% if inchiriere.carte == x.id %}
+                        value="{{ x.nume }}"
+                      {% endif %}
+                   {% endfor %}
+                   style="border-color:red"
+                   readonly="readonly"></span><br>
+
+        <label for="card">Client:</label><br>
+        <input id="nume_client"
+                      type="text"
+                      value="{{ inchiriere.card }}"
+                      readonly="readonly"
+                      style="border-color:red;width:90px;height: 30px;text-align:center;" required>
+
+        <span><input id="nume_client"
+                       type="text"
+                       {% for x in clienti %}
+                          {% if inchiriere.card == x.card %}
+                            value="{{ x.nume }}"
+                          {% endif %}
+                      {% endfor %}
+                      readonly="readonly"
+                      style="border-color:red" required></span>
+
+
+
+        <br><input style="background-color: #04AA6D; color: white;"type="submit" value="UPDATE">
+    </form>
+    <br>
+    <hr>
+
+    {% if flag == 1 %}
+        <p style = "background-color: #AAEFDE;
+            color: darkgreen;">
+            {{ mesaj }}
+        </p>
+    {% elif flag == 0 %}
+        <p style = "background-color: #AAEFDE;
+            color: red;">
+            {{ mesaj }}
+        </p>
+    {% endif %}
+
+    <hr>
+
+    <p>Inapoi la: <a href="http://127.0.0.1:8000/inchirieri">Inchirieri</a></p>
+</body>
+</html>

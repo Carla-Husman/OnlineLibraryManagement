@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{% static 'home.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>Editare</title>
+</head>
+
+<style>
+    label{
+        color: #05381D;
+        font-weight: bold;
+        font-family: "Times New Roman";
+        padding: 8px;
+        text-align: center;
+    }
+    input{
+        color: black;
+        font-size:24px;
+        font-family: "Times New Roman";
+        text-align: left;
+    }
+    select{
+        color: black;
+        font-size:24px;
+        font-family: "Times New Roman";
+        text-align: center;
+    }
+</style>
+
+<body>
+    <h1>Editarea cartii:<i>{{ carte.nume_carte }}</i></h1>
+
+    <form action = "" method = "POST">
+        {% csrf_token %}
+        <label for="nume">Denumire: </label><br>
+        <input id="nume"
+               type="text"
+               name="nume"
+               value="{{ carte.nume_carte }} " required><br>
+
+        <label for="autor">Autor: </label><br>
+        <input id="autor"
+               type="text"
+               name="autor"
+                {% if carte.autor == None %}
+                    value="{{ "" }}"><br>
+              {% else %}
+                 value="{{ carte.autor }}"><br>
+              {% endif %}
+
+        <label for="gen">Gen: </label><br>
+        <input id="gen"
+               type="text"
+               name="gen"
+               value="{{ carte.gen }}" required><br>
+
+        <label for="an">Anul aparitiei: </label><br>
+        <input id="an"
+               type="number"
+               name="an"
+               {% if carte.an == None %}
+                    value="{{ "" }}"><br>
+              {% else %}
+                 value="{{ carte.an }}"><br>
+              {% endif %}
+
+        <label for="exemplare">Exemplare: </label><br>
+        <input id="exemplare"
+               type="number"
+               name="exemplare"
+               value="{{ carte.exemplare }}" required><br>
+
+        <label for="editura">Editura:</label><br>
+        <select id="editura" name="editura" readonly="readonly">
+            <option value="{{ carte.editura }}">{{ carte.editura }}</option>
+              {% for x in edituri %}
+                  {% if carte.editura != x.nume %}
+                     <option value="{{ x.nume }}">{{ x.nume }}</option>
+                  {% endif %}
+              {% endfor %}
+        </select><br>
+
+        <br><input style="background-color: #04AA6D; color: white;"type="submit" value="UPDATE">
+    </form>
+
+    <hr>
+
+    {% if flag == 1 %}
+        <p style = "background-color: #AAEFDE;
+            color: darkgreen;">
+            {{ mesaj }}
+        </p>
+    {% elif flag == 0 %}
+        <p style = "background-color: #AAEFDE;
+            color: red;">
+            {{ mesaj }}
+        </p>
+    {% endif %}
+
+    <hr>
+
+    <p>Inapoi la: <a href="http://127.0.0.1:8000/carti">Carti</a></p>
+</body>
+</html>

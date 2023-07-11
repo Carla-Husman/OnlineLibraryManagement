@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{% static 'home.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>Adaugare Editura</title>
+</head>
+
+<style>
+    label{
+        color: #05381D;
+        font-weight: bold;
+        font-family: "Times New Roman";
+        padding: 8px;
+        text-align: center;
+    }
+    input{
+        color: black;
+        font-size:24px;
+        font-family: "Times New Roman";
+        text-align: left;
+    }
+</style>
+
+<body>
+    <h1>ADAUGARE EDITURA NOUA</h1>
+
+    <form action = "" method = "POST">
+        {% csrf_token %}
+        <label for="nume">Denumire: </label>
+        <span><label for="strada" style ="margin-left:7em;">Strada: </label><br> </span>
+        <input id="nume"
+               type="text"
+               name="nume"
+               value="{{ mesajNume }}" required>
+
+      	&emsp;
+        <span><input id="strada"
+               type="text"
+               name="strada"
+               value="{{ mesajStrada }}" required></span><br>
+
+        <label for="nr"> Numarul: </label>
+        <span><label for="judet" style ="margin-left:7em;">Judet: </label><br></span>
+        <input id="nr"
+               type="text"
+               name="nr"
+               value="{{ mesajNr }}" required>
+
+        &emsp;
+        <span><input id="judet"
+               type="text"
+               name="judet"
+               value="{{ mesajJudet }}" required></span><br>
+
+        <label for="oras" style ="margin-left:1em;">Oras: </label>
+        <span><label for="telefon" style ="margin-left:8em;">Telefon: </label><br></span>
+        <input id="oras"
+               type="text"
+               name="oras"
+               value="{{ mesajOras }}">
+
+        &emsp;
+        <span><input id="telefon"
+               type="text"
+               name="telefon"
+               value="{{ mesajTelefon }}" required></span><br>
+
+        <br><input style="background-color: #04AA6D; color: white;"type="submit" value="ADAUGARE">
+    </form>
+
+    <hr>
+
+    {% if flag == 1 %}
+        <p style = "background-color: #AAEFDE;
+            color: darkgreen;">
+            {{ mesaj }}
+        </p>
+    {% elif flag == 0 %}
+        <p style = "background-color: #AAEFDE;
+            color: red;">
+            {{ mesaj }}
+        </p>
+    {% endif %}
+
+    <hr>
+
+    <p>Inapoi la: <a href="http://127.0.0.1:8000/edituri">Edituri</a></p>
+</body>
+</html>

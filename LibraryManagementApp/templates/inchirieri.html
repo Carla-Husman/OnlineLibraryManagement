@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{% static 'home.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>INCHIRIERI</title>
+</head>
+
+<style>
+    table, th, td {
+        border:1px solid black;
+        font-family: "Times New Roman";
+        border-color: #05381D;
+        color:#000000;
+        border-spacing: 2px;
+        text-align:center;
+    }
+    th{
+        background-color: #BAF0D3;
+        font-weight: bold;
+        font-size:25px;
+    }
+    td {
+        background-color: #cccccc;
+        font-style: normal;
+        font-size:20px;
+    }
+    .border {
+        border-width: 3px;
+        border-style: solid;
+        border-color: #868686;
+        background-color: #868686;
+        font-size:15px;
+        color: #BAF0D3;
+    }
+    a{
+        text-decoration:none;
+    }
+    .adaugare{
+        width:fit-content;
+        background-color:#FFFFFF;
+        border:5px solid;
+        border-style: ridge;;
+        font-family: "Times New Roman";
+        text-align:center;
+        color: darkslategray;
+        font-size: 20px;
+        float:right;
+    }
+    h1{
+        line-height:0;
+    }
+    body{
+        margin:180px;
+    }
+</style>
+
+
+<body>
+    <h1>INCHIRIERI</h1>
+
+    <p class="adaugare"><a href="adaugareInchiriere">Adaugare Inchiriere</a></p>
+
+    <table style="width:100%">
+      <tr>
+          <th>ID</th>
+          <th>STARE RET.</th>
+          <th>DATA INCHIRIERE</th>
+          <th>DATA RETURNARE</th>
+          <th>ID CARTE</th>
+          <th>CARD</th>
+          <th>EDIT/STG</th>
+      </tr>
+
+        {% for x in inchiriere %}
+          <tr>
+              <td><i>{{ x.id_inchiriere }}</i></td>
+
+              {% if x.stare_returnare == None %}
+                  <td>{{ "" }}</td>
+              {% else %}
+                 <td>{{ x.stare_returnare }}</td>
+              {% endif %}
+
+              <td>{{ x.data_inchiriere }}</td>
+              <td>{{ x.data_returnare }}</td>
+              <td><a href = "carte/{{ x.id_carte }}">{{ x.id_carte }}</a></td>
+              <td><a href = "client/{{ x.nr_card }}">{{ x.nr_card }}</a></td>
+              <td>
+                  <span class="border"><a href="editareInchiriere/{{ x.id_inchiriere }}" style="color: #BAF0D3" >editare</a></span>
+                  <span>&emsp;</span>
+                  <span class="border"><a href="stergereInchiriere/{{ x.id_inchiriere }}" style="color: #BAF0D3" >stergere</a></span>
+              </td>
+          </tr>
+        {% endfor %}
+
+    </table>
+
+    <hr>
+
+    <p>Inapoi la: <a href="http://127.0.0.1:8000">Meniu</a></p>
+</body>
+</html>

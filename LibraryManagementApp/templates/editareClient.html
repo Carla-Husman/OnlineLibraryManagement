@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{% static 'home.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>Editare</title>
+</head>
+
+<style>
+    label{
+        color: #05381D;
+        font-weight: bold;
+        font-family: "Times New Roman";
+        padding: 8px;
+        text-align: center;
+    }
+    input{
+        color: black;
+        font-size:24px;
+        font-family: "Times New Roman";
+        text-align: left;
+    }
+</style>
+
+<body>
+
+    <h1>Editare detalii client: <i>{{ detaliu.nume }}</i></h1>
+
+    <form action = "" method = "POST">
+        {% csrf_token %}
+        <label for="card">Nr. card: </label><br>
+        <input id="card"
+               type="number"
+               name="card"
+               readonly="readonly"
+               style="border-color:red"
+               value="{{ detaliu.nr_card }}"><br>
+
+        <label for="your_name">Numele: </label><br>
+        <input id="your_name"
+               type="text"
+               name="your_name"
+               value="{{ detaliu.nume }}" required><br>
+
+        <label for="cnp">CNP: </label><br>
+        <input id="cnp"
+               type="number"
+               name="cnp"
+               readonly="readonly"
+               style="border-color:red"
+               value="{{ detaliu.cnp }}"><br>
+
+        <label for="serie">Seria si numarul: </label><br>
+        <input id="serie"
+               type="text"
+               name="serie"
+               readonly="readonly"
+               style="border-color:red"
+               value="{{ detaliu.serie_numar }}"><br>
+
+        <label for="telefon">Telefon: </label><br>
+        <input id="telefon"
+               type="text"
+               name="telefon"
+               value="{{ detaliu.telefon }}" required><br>
+
+        <br><input style="background-color: #04AA6D; color: white;"type="submit" value="UPDATE">
+    </form>
+
+
+    {% if flag == 1 %}
+        <p style = "background-color: #AAEFDE;
+            color: darkgreen;">
+            {{ mesaj }}
+        </p>
+    {% elif flag == 0 %}
+        <p style = "background-color: #AAEFDE;
+            color: red;">
+            {{ mesaj }}
+        </p>
+    {% endif %}
+
+    <hr>
+
+    <p>Inapoi la: <a href="http://127.0.0.1:8000/clienti">Clienti</a></p>
+
+
+</body>
+</html>

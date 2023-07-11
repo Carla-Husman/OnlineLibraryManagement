@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{% static 'home.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>Adaugare Carte</title>
+</head>
+
+<style>
+    label{
+        color: #05381D;
+        font-weight: bold;
+        font-family: "Times New Roman";
+        padding: 8px;
+        text-align: center;
+    }
+    input{
+        color: black;
+        font-size:24px;
+        font-family: "Times New Roman";
+        text-align: left;
+    }
+    select{
+        color: black;
+        font-size:24px;
+        font-family: "Times New Roman";
+        text-align: center;
+    }
+</style>
+
+<body>
+    <h1>ADAUGARE CARTE NOUA</h1>
+
+
+    <form action = "" method = "POST">
+        {% csrf_token %}
+        <label for="nume">Titlu: </label>
+        <span><label for="autor" style ="margin-left:8em;">Autor: </label><br> </span>
+        <input id="nume"
+               type="text"
+               name="nume"
+               value="{{ mesajNume }}" required>
+
+      	&emsp;
+        <span><input id="autor"
+               type="text"
+               name="autor"
+               value="{{ mesajAutor }}"></span><br>
+
+        <label for="gen" style ="margin-left:2em;"> Gen: </label>
+        <span><label for="an" style ="margin-left:6em;">Anul aparitiei: </label><br></span>
+        <input id="gen"
+               type="text"
+               name="gen"
+               value="{{ mesajGen }}" required>
+
+        &emsp;
+        <span><input id="an"
+               type="text"
+               name="an"
+               value="{{ mesajAn }}" ></span><br>
+
+        <label for="exemplare">Exemplare: </label>
+        <span><label for="editura" style ="margin-left:6em;">Editura: </label><br></span>
+        <input id="exemplare"
+               type="text"
+               name="exemplare"
+               value="{{ mesajEx }}" required>
+
+        &emsp;
+        <span><select autocomplete="on" id="editura" name="editura"
+                      style ="width: 300px;height: 35px;text-align:left;">
+              {% for x in edituri %}
+                  <option value="{{ x.nume }}">{{ x.nume }}</option>
+              {% endfor %}
+        </select></span><br>
+
+
+
+        <br><input style="background-color: #04AA6D; color: white;"type="submit" value="ADAUGARE">
+    </form>
+
+    <hr>
+
+    {% if flag == 1 %}
+        <p style = "background-color: #AAEFDE;
+            color: darkgreen;">
+            {{ mesaj }}
+        </p>
+    {% elif flag == 0 %}
+        <p style = "background-color: #AAEFDE;
+            color: red;">
+            {{ mesaj }}
+        </p>
+    {% endif %}
+
+    <hr>
+
+    <p>Inapoi la: <a href="http://127.0.0.1:8000/carti">Carti</a></p>
+
+</body>
+</html>

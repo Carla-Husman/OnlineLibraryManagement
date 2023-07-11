@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{% static 'home.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>Editare</title>
+</head>
+
+<style>
+    label{
+        color: #05381D;
+        font-weight: bold;
+        font-family: "Times New Roman";
+        padding: 8px;
+        text-align: center;
+    }
+    input{
+        color: black;
+        font-size:24px;
+        font-family: "Times New Roman";
+        text-align: left;
+    }
+    select{
+        color: black;
+        font-size:24px;
+        font-family: "Times New Roman";
+        text-align: center;
+    }
+</style>
+
+<body>
+    <h1>Editura:<i>{{ editura.nume }}</i></h1>
+
+
+    <form action = "" method = "POST">
+        {% csrf_token %}
+        <label for="nume">Denumire: </label><br>
+        <input id="nume"
+               type="text"
+               name="nume"
+               readonly="readonly"
+               style="border-color:red"
+               value="{{ editura.nume }}" required><br>
+
+        <label for="adresa">Adresa: </label><br>
+        <input id="adresa"
+               type="text"
+               name="adresa"
+               value="{{ editura.adresa }}" required><br>
+
+
+        <label for="telefon">Telefon: </label><br>
+        <input id="telefon"
+               type="text"
+               name="telefon"
+               value="{{ editura.telefon }}" required><br>
+
+        <br><input style="background-color: #04AA6D; color: white;"type="submit" value="UPDATE">
+    </form>
+    <br>
+
+    <hr>
+
+    {% if flag == 1 %}
+        <p style = "background-color: #AAEFDE;
+            color: darkgreen;">
+            {{ mesaj }}
+        </p>
+    {% elif flag == 0 %}
+        <p style = "background-color: #AAEFDE;
+            color: red;">
+            {{ mesaj }}
+        </p>
+    {% endif %}
+
+    <hr>
+
+    <p>Inapoi la: <a href="http://127.0.0.1:8000/edituri">Edituri</a></p>
+
+</body>
+</html>

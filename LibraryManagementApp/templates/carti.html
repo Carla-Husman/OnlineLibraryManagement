@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{% static 'home.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>CARTI</title>
+</head>
+
+<style>
+    table, th, td {
+        border:1px solid black;
+        font-family: "Times New Roman";
+        border-color: #05381D;
+        color:#000000;
+        border-spacing: 2px;
+        text-align:center;
+    }
+    th{
+        background-color: #BAF0D3;
+        font-weight: bold;
+        font-size:25px;
+    }
+    td {
+        background-color: #cccccc;
+        font-style: normal;
+        font-size:20px;
+    }
+    .border {
+        border-width: 3px;
+        border-style: solid;
+        border-color: #868686;
+        background-color: #868686;
+        font-size:15px;
+        color: #BAF0D3;
+    }
+    a{
+        text-decoration:none;
+    }
+    .adaugare{
+        width:fit-content;
+        background-color:#FFFFFF;
+        border:5px solid;
+        border-style: ridge;;
+        font-family: "Times New Roman";
+        text-align:center;
+        color: darkslategray;
+        font-size: 20px;
+        float:right;
+    }
+    h1{
+        line-height:0;
+    }
+    body{
+        margin:180px;
+    }
+</style>
+
+
+<body>
+    <h1>CARTI</h1>
+
+    <p class="adaugare"><a href="adaugareCarte">Adaugare carte</a></p>
+
+    <table style="width:100%">
+      <tr>
+          <th>ID</th>
+          <th>DENUMIRE</th>
+          <th>AUTOR</th>
+          <th>GEN</th>
+          <th>AN</th>
+          <th>EXEMPLARE</th>
+          <th>EDITURA</th>
+          <th>EDIT/STG</th>
+      </tr>
+
+        {% for x in carte %}
+          <tr>
+              <td><i>{{ x.id_carte }}</i></td>
+              <td>{{ x.nume_carte }}</td>
+
+              {% if x.autor == None %}
+                  <td>{{ "" }}</td>
+              {% else %}
+                 <td>{{ x.autor }}</td>
+              {% endif %}
+
+              <td>{{ x.gen }}</td>
+
+              {% if x.an_aparitie == None %}
+                  <td>{{ "" }}</td>
+              {% else %}
+                 <td>{{ x.an_aparitie }}</td>
+              {% endif %}
+
+              <td>{{ x.exemplare }}</td>
+              <td>{{ x.id_nume_editura }}</td>
+              <td>
+                  <span class="border"><a href="editareCarte/{{ x.id_carte }}" style="color: #BAF0D3">editare</a></span>
+                  <span>&emsp;</span>
+                  <span class="border"><a href="stergereCarte/{{ x.id_carte }}" style="color: #BAF0D3">stergere</a></span>
+              </td>
+          </tr>
+        {% endfor %}
+
+    </table>
+
+    <p>Inapoi la: <a href="http://127.0.0.1:8000">Meniu</a></p>
+
+</body>
+</html>

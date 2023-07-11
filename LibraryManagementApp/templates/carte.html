@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{% static 'home.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>Carte</title>
+</head>
+
+<style>
+    li{
+        background-size: 60px 400px;
+        cursor: default;
+        list-style-type: none;
+        font-family: "Times New Roman";
+    }
+    li:hover {
+        transform:  none;
+    }
+</style>
+
+<body>
+
+    {% for x in carte %}
+         <h1>Carte Inchiriata: <i>{{ x.nume_carte }}</i></h1>
+    {% endfor %}
+
+
+    {% for x in carte %}
+        <li>
+            <span style="color:darkgreen;">AUTOR</span> : {{ x.autor }} <br>
+            <span style="color:darkgreen;">GEN</span>  : {{ x.gen}} <br>
+            <span style="color:darkgreen;">AN APARITIE</span>  : {{ x.an_aparitie }} <br>
+            <span style="color:darkgreen;">EXEMPLARE</span>  : {{ x.exemplare }} <br>
+            <span style="color:darkgreen;">EDITURA</span>  : {{ x.id_nume_editura }} <br>
+        </li>
+    {% endfor %}
+
+    <hr>
+
+    <p>Inapoi la: <a href="http://127.0.0.1:8000/inchirieri">Inchirieri</a></p>
+
+</body>
+</html>
